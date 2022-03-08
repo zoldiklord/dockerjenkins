@@ -11,3 +11,4 @@ node {
                 sh 'docker ps'
         }
 }
+}
