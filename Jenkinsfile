@@ -2,15 +2,18 @@ pipeline {
         agent any
      stages {
         stage('Clone') {
+             steps {
                 checkout scm 
-        }
+        }}
         stage('Build image') {
+              steps {
                 docker.build("hamza/nginx")
-        }
+        }}
         stage('Run image') {
+              steps {
                 docker.image('hamza/nginx').withRun('-p 80:80') { c ->
                 sh 'docker ps'
-                
+                }
         }
 }
 stage( 'Deploy') {
