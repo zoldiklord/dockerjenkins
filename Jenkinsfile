@@ -23,7 +23,7 @@ stage( 'Deploy') {
     script {
       docker.withRegistry(
          'https://710245512785.dkr.ecr.us-east-1.amazonaws.com',
-         'myawscredentials') {
+         'ecr:us-east-1:myawscredentials') {
          def myImage
          myImage.push('1.0')
          docker.build('docker-image')
