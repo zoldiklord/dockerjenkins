@@ -1,10 +1,11 @@
 pipeline {
-    def app 
+        agent any
+     stages {
         stage('Clone') {
                 checkout scm 
         }
         stage('Build image') {
-                app = docker.build("hamza/nginx")
+                docker.build("hamza/nginx")
         }
         stage('Run image') {
                 docker.image('hamza/nginx').withRun('-p 80:80') { c ->
@@ -21,4 +22,4 @@ stage( 'Deploy') {
          def myImage
          myImage.push('1.0')
                          docker.build('docker-image')
-}}}}}
+}}}}}}
