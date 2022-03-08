@@ -13,8 +13,7 @@ pipeline {
         stage('Run image') {
               steps {
                 script {
-                def myImage
-                myImage = docker.image('hamza/nginx').withRun('-p 80:80') { c ->
+                docker.image('hamza/nginx').withRun('-p 80:80') { c ->
                 sh 'docker ps'
                 }}
         }
@@ -25,7 +24,6 @@ stage( 'Deploy') {
       docker.withRegistry(
          'https://710245512785.dkr.ecr.us-east-1.amazonaws.com',
          'ecr:us-east-1:myawscredentials') {
-         
+         def myImage = docker.build('docker-image')
          myImage.push('1.0')
-         docker.build('docker-image')
 }}}}}}
