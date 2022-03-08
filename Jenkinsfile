@@ -7,13 +7,15 @@ pipeline {
         }}
         stage('Build image') {
               steps {
+        script {
                 docker.build("hamza/nginx")
-        }}
+        }}}
         stage('Run image') {
               steps {
+                script {
                 docker.image('hamza/nginx').withRun('-p 80:80') { c ->
                 sh 'docker ps'
-                }
+                }}
         }
 }
 stage( 'Deploy') {
